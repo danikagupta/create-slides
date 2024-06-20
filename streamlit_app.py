@@ -201,6 +201,8 @@ def main():
         },thread):
             print(f"\n\nNew msg:\n++++++++\n{s}\n******\n")
             st.write(s)
+            snapshot = abot.graph.get_state(thread)
+            st.sidebar.write(snapshot)
         print("Completed writer Step 1")
 
 
