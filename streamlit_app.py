@@ -3,12 +3,14 @@ import streamlit as st
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, List
 import operator
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langchain_core.messages import AnyMessage, SystemMessage, HumanMessage, AIMessage, ChatMessage
 from langchain.callbacks.base import BaseCallbackHandler
 
 from langchain_openai import ChatOpenAI
-from langchain_core.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from tavily import TavilyClient
 # import os
 import sqlite3
@@ -40,7 +42,7 @@ class StreamHandler(BaseCallbackHandler):
 
 class ewriter():
     def __init__(self, stream_handler):
-        self.model = ChatOpenAI(model="gpt-3.5-turbo", 
+        self.model = ChatOpenAI(model="gpt-4o-mini", 
                                 temperature=0,
                                 api_key=st.secrets["OPENAI_API_KEY"],
                                 callbacks=[stream_handler])

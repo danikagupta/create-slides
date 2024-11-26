@@ -13,5 +13,6 @@ tavily-python
 scikit-learn
 altair
 
-
+langgraph-checkpoint-sqlite
+pydantic
 
